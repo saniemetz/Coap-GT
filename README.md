@@ -54,6 +54,10 @@ Y escribimos el siguiente comando.
 --------------------------------------------------------------------------------
 Navegador y visualizacion de los datos
 --------------------------------------------------------------------------------
+Instalar firefox la extensión "Copper".
+
+			https://addons.mozilla.org/es/firefox/addon/copper-270430/
+			
 Sobre la PC deberemos abrir un navegador y colocar la direccion IPv6 del mote de
 la siguiente forma.
 
