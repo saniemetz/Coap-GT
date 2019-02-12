@@ -2,7 +2,7 @@
 
 Coap para OpenMote
 --------------------------------------------------------------------------------
-Esta aplicacion trabaja sobre OpenMotes. El codigo es una moificación de los
+Esta aplicacion trabaja sobre OpenMote. El codigo es una moificación de los
 ejemplos desarrollados en el libro "IoT in five days" de Antonio Liñán Colina,
 Alvaro Vives, Marco Zennaro, Antoine Bagula y Ermanno Pietrosemoli. En el libro
 los ejemplos son desarrollados para una plataforma zolertia. Por lo que se hizo 
