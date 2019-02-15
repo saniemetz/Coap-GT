@@ -1,3 +1,58 @@
+# Instalación de SO contiki 
+
+Agregar repositorio, Instalar compilador gcc para arm
+--------------------------------------------------------------------------------
+			sudo apt-add-repository ppa:terry.guo/gcc-arm-embedded
+			sudo apt-get update
+			sudo apt-get install gcc-arm-none-eabi
+
+Instalar desde git la versión de contiki con soporte de OpenMote 
+--------------------------------------------------------------------------------
+	Nota: reemplazar “user” por el usuario específico.
+
+		sudo apt install git
+		sudo git clone https://github.com/contiki-os/contiki.git /home/user/contiki-openmote 
+		sudo cd contiki-openmote
+		sudo git submodule update --init
+
+# Ejemplo de procedimiento para tostar motes (OpenMote cc2538)
+	Nota1: En este caso se procederá a quemar en el mote el software "border-rouer" el proceso es similar para otros programas.
+	Nota2: reemplazar “user” por el usuario específico.
+Instalar librería Serial de python para establecer comunicación con el mote
+--------------------------------------------------------------------------------
+		sudo apt-get install python-serial
+Cambiarse de directorio (en este caso rpl-border-router) para generar el binario de los motes
+--------------------------------------------------------------------------------		
+		cd contiki-openmote/examples/ipv6/rpl-border-router
+Indicar la plataforma para la que compilaremos el programa
+--------------------------------------------------------------------------------
+		echo 'TARGET = openmote-cc2538' > Makefile.target
+		make
+Conectar el mote que quiera cargarle el firmware de border-router. A continuación, para transferir el binario al microcontrolador al mote ejecutar:
+--------------------------------------------------------------------------------
+		make border-router.upload
+
+	Nota: para cargar el programa en Openmote cc2538 revA1, utilizamos la siguiente función: 
+		make TARGET=openmote-cc2538 BOARD_REVISION=REV_A1 PORT=/dev/ttyUSB0 border-router.upload
+	Reemplazando “ttyUSB0” por el puerto en el que está conectado el mote. Para averiguarlo ejecutar:
+		dmesg		
+# Instructivo para utilizar la aplicación de Contiki OS "Tunslip6"
+Navegamos al directorio donde se encuentra la aplicación:
+--------------------------------------------------------------------------------
+		cd contiki-openmote/tools
+		make tunslip6
+Conectamos el mote que contiene el programa border-router a la PC. Para determinar en cuál puerto serie se encuentra, en la terminal tecleamos:
+--------------------------------------------------------------------------------
+		dmesg
+
+Si, por ejemplo, se conectó en el puerto serie /dev/ttyUSB0, colocamos la siguiente línea para configurar nuestro túnel.
+--------------------------------------------------------------------------------
+		sudo ./tunslip6 aaaa::1/64 –s /dev/ttyUSB0  (unicamente para LAN)
+Si deseamos que tenga salida a internet (FRM), tecleamos:
+--------------------------------------------------------------------------------
+		sudo ./tunslip6 2801:1e:4007:c0da::1/64 –s /dev/ttyUSB0
+	Nota: debemos tener la interfaz que conecta a internet con la siguiente IP estática: 2801:1e:4007:23::c0da:1/64
+
 # Coap-GT
 
 Coap para OpenMote
